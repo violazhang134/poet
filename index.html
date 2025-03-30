@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Poetic Moments</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body class="min-h-screen transition-all duration-700 bg-stone-100">
+    <div class="container mx-auto px-4 py-8 flex flex-col min-h-screen">
+        <header class="py-6">
+            <h1 class="text-3xl md:text-4xl text-center font-geist-mono tracking-wider text-stone-800">Poetic Moments</h1>
+            <p class="text-center text-stone-600 mt-2 italic">Inspired by the style of rupi kaur</p>
+        </header>
+
+        <main class="flex-grow flex flex-col items-center justify-center py-8">
+            <div id="poem-card" class="w-full max-w-md aspect-[3/4] relative transition-all duration-500 rounded-lg shadow-sm overflow-hidden transform hover:scale-[1.02]">
+                <div id="poem-content" class="absolute inset-0 flex flex-col items-center justify-center p-8 md:p-12">
+                    <div id="poem-text" class="text-center mb-8 transition-all">
+                        <p class="text-xl md:text-2xl leading-relaxed"></p>
+                    </div>
+                    <div id="poem-author" class="text-right w-full mt-auto italic opacity-75">
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-4 mt-8">
+                <button id="generate-btn" class="px-6 py-2 rounded-md bg-stone-800 text-white hover:bg-stone-700 transition-colors">
+                    Generate New Poem
+                </button>
+                <button id="download-btn" class="px-6 py-2 rounded-md bg-stone-200 text-stone-800 hover:bg-stone-300 transition-colors">
+                    Download Card
+                </button>
+            </div>
+
+            <div class="w-full max-w-md mt-12 space-y-6">
+                <div class="space-y-2">
+                    <h3 class="text-sm uppercase tracking-wider text-stone-500 font-semibold">Customize</h3>
+                    <div>
+                        <label for="custom-text" class="block text-sm text-stone-600 mb-1">Your Own Words</label>
+                        <textarea id="custom-text" class="w-full p-3 rounded-md border border-stone-300 focus:outline-none focus:ring-1 focus:ring-stone-500" rows="4" placeholder="Enter your own poem..."></textarea>
+                        <button id="apply-custom-text" class="mt-2 px-4 py-1.5 rounded-md bg-stone-200 text-stone-800 hover:bg-stone-300 transition-colors text-sm">
+                            Apply Text
+                        </button>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <h3 class="text-sm uppercase tracking-wider text-stone-500 font-semibold">Style</h3>
+                    <div class="grid grid-cols-5 gap-2">
+                        <button class="style-btn w-full aspect-square rounded-md border border-stone-300 hover:border-stone-500" data-style="0"></button>
+                        <button class="style-btn w-full aspect-square rounded-md border border-stone-300 hover:border-stone-500" data-style="1"></button>
+                        <button class="style-btn w-full aspect-square rounded-md border border-stone-300 hover:border-stone-500" data-style="2"></button>
+                        <button class="style-btn w-full aspect-square rounded-md border border-stone-300 hover:border-stone-500" data-style="3"></button>
+                        <button class="style-btn w-full aspect-square rounded-md border border-stone-300 hover:border-stone-500" data-style="4"></button>
+                        <button class="style-btn w-full aspect-square rounded-md border border-stone-300 hover:border-stone-500" data-style="5"></button>
+                        <button class="style-btn w-full aspect-square rounded-md border border-stone-300 hover:border-stone-500" data-style="6"></button>
+                        <button class="style-btn w-full aspect-square rounded-md border border-stone-300 hover:border-stone-500" data-style="7"></button>
+                        <button class="style-btn w-full aspect-square rounded-md border border-stone-300 hover:border-stone-500" data-style="8"></button>
+                        <button class="style-btn w-full aspect-square rounded-md border border-stone-300 hover:border-stone-500" data-style="9"></button>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <h3 class="text-sm uppercase tracking-wider text-stone-500 font-semibold">Font</h3>
+                    <div class="grid grid-cols-5 gap-2">
+                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="0">宋体 A</button>
+                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="1">宋体 B</button>
+                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="2">宋体 C</button>
+                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="3">宋体 D</button>
+                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="4">宋体 E</button>
+                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="5">宋体 F</button>
+                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="6">宋体 G</button>
+                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="7">宋体 H</button>
+                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="8">宋体 I</button>
+                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="9">宋体 J</button>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <h3 class="text-sm uppercase tracking-wider text-stone-500 font-semibold">Text Color</h3>
+                    <div class="grid grid-cols-5 gap-2">
+                        <button class="color-btn w-full aspect-square rounded-md border border-stone-300 hover:border-stone-500 bg-stone-800" data-color="#1c1917"></button>
+                        <button class="color-btn w-full aspect-square rounded-md border border-stone-300 hover:border-stone-500 bg-stone-600" data-color="#57534e"></button>
+                        <button class="color-btn w-full aspect-square rounded-md border border-stone-300 hover:border-stone-500 bg-amber-900" data-color="#78350f"></button>
+                        <button class="color-btn w-full aspect-square rounded-md border border-stone-300 hover:border-stone-500 bg-emerald-900" data-color="#064e3b"></button>
+                        <button class="color-btn w-full aspect-square rounded-md border border-stone-300 hover:border-stone-500 bg-indigo-900" data-color="#312e81"></button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="py-6 text-center text-stone-500 text-sm">
+            <p>Built with <a href="https://flowith.net" target="_blank" class="underline hover:text-stone-700">Flowith Oracle</a>.</p>
+        </footer>
+    </div>
+    
+    <script src="poems.js"></script>
+    <script src="download.js"></script>
+    <script src="script.js"></script>
+    <script>
+    window.addEventListener("wheel", (e)=> {
+      const isPinching = e.ctrlKey
+      if(isPinching) e.preventDefault()
+    }, { passive: false })
+    </script>
+</body>
+</html>

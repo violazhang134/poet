@@ -1,0 +1,128 @@
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('https://cdn.jsdelivr.net/npm/geist-font@latest/dist/fonts/GeistMono-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.font-geist-mono {
+  font-family: 'Geist Mono', monospace;
+}
+
+/* Chinese Song Fonts */
+.chinese-font-0 { font-family: 'Noto Serif SC', serif; font-weight: 300; }
+.chinese-font-1 { font-family: 'Noto Serif SC', serif; font-weight: 400; }
+.chinese-font-2 { font-family: 'Noto Serif SC', serif; font-weight: 500; }
+.chinese-font-3 { font-family: 'Noto Serif SC', serif; font-weight: 600; }
+.chinese-font-4 { font-family: 'Songti SC', serif; }
+.chinese-font-5 { font-family: 'Noto Serif SC', serif; font-weight: 400; letter-spacing: 1px; }
+.chinese-font-6 { font-family: 'Noto Serif SC', serif; font-weight: 400; font-style: italic; }
+.chinese-font-7 { font-family: 'Noto Serif SC', serif; font-weight: 500; letter-spacing: 2px; }
+.chinese-font-8 { font-family: 'Noto Serif SC', serif; font-weight: 300; letter-spacing: -0.5px; }
+.chinese-font-9 { font-family: 'Noto Serif SC', serif; font-weight: 600; letter-spacing: 1.5px; }
+
+/* Card Styles */
+.card-style-0 {
+  background-color: #fff6f6;
+  color: #1c1917;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.card-style-1 {
+  background-color: #f5f5f4;
+  color: #1c1917;
+  border: 1px solid #e7e5e4;
+}
+
+.card-style-2 {
+  background: linear-gradient(135deg, #fff7ed, #fef3c7);
+  color: #78350f;
+}
+
+.card-style-3 {
+  background-color: #f8fafc;
+  color: #0f172a;
+  border: 2px solid #e2e8f0;
+}
+
+.card-style-4 {
+  background: linear-gradient(to bottom, #ecfccb, #d9f99d);
+  color: #365314;
+}
+
+.card-style-5 {
+  background: #f1f5f9;
+  color: #334155;
+  border-radius: 2px;
+  border-left: 4px solid #94a3b8;
+}
+
+.card-style-6 {
+  background: linear-gradient(45deg, #fff1f2, #ffe4e6);
+  color: #9f1239;
+}
+
+.card-style-7 {
+  background: #fafaf9;
+  color: #44403c;
+  border: 1px solid #d6d3d1;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.card-style-8 {
+  background: linear-gradient(to right, #f0fdfa, #ccfbf1);
+  color: #134e4a;
+}
+
+.card-style-9 {
+  background: #f5f3ff;
+  color: #5b21b6;
+  border-top: 3px solid #a78bfa;
+}
+
+/* Style preview buttons */
+.style-btn[data-style="0"] { background-color: #fff6f6; }
+.style-btn[data-style="1"] { background-color: #f5f5f4; border: 1px solid #e7e5e4; }
+.style-btn[data-style="2"] { background: linear-gradient(135deg, #fff7ed, #fef3c7); }
+.style-btn[data-style="3"] { background-color: #f8fafc; border: 2px solid #e2e8f0; }
+.style-btn[data-style="4"] { background: linear-gradient(to bottom, #ecfccb, #d9f99d); }
+.style-btn[data-style="5"] { background: #f1f5f9; border-left: 4px solid #94a3b8; }
+.style-btn[data-style="6"] { background: linear-gradient(45deg, #fff1f2, #ffe4e6); }
+.style-btn[data-style="7"] { background: #fafaf9; border: 1px solid #d6d3d1; }
+.style-btn[data-style="8"] { background: linear-gradient(to right, #f0fdfa, #ccfbf1); }
+.style-btn[data-style="9"] { background: #f5f3ff; border-top: 3px solid #a78bfa; }
+
+.style-btn.active, .font-btn.active, .color-btn.active {
+  box-shadow: 0 0 0 2px #57534e;
+}
+
+/* Button transitions */
+button {
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Poem content formatting */
+#poem-text {
+  font-family: 'Playfair Display', 'Noto Serif SC', serif;
+  line-height: 1.8;
+}
+
+#poem-author {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+}
+
+/* Style for the card when being ready for download */
+.download-preparing {
+  transform: scale(0.98);
+  opacity: 0.9;
+  transition: all 0.3s ease;
+}
