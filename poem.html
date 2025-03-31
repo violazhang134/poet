@@ -14,7 +14,6 @@
     <div class="container mx-auto px-4 py-8 flex flex-col min-h-screen">
         <header class="py-6">
             <h1 class="text-3xl md:text-4xl text-center font-geist-mono tracking-wider text-stone-800">Poetic Moments</h1>
-            <p class="text-center text-stone-600 mt-2 italic">Inspired by the style of rupi kaur</p>
         </header>
 
         <nav class="mb-8">
@@ -24,38 +23,48 @@
             </ul>
         </nav>
 
-        <main class="flex-grow flex flex-col items-center justify-center py-8">
-            <div id="poem-card" class="w-full max-w-md aspect-[3/4] relative transition-all duration-500 rounded-lg shadow-sm overflow-hidden transform hover:scale-[1.02]">
-                <div id="poem-content" class="absolute inset-0 flex flex-col items-center justify-center p-8 md:p-12">
-                    <div id="poem-text" class="text-center mb-8 transition-all">
-                        <p class="text-xl md:text-2xl leading-relaxed"></p>
+        <main class="flex-grow py-8">
+            <!-- 左右分栏布局：在大屏幕上水平排列，在小屏幕上垂直排列 -->
+            <div class="flex flex-col md:flex-row md:space-x-8 items-center md:items-start">
+                <!-- 左侧：诗歌卡片展示区域 -->
+                <div class="w-full md:w-1/2 flex flex-col items-center">
+                    <div id="poem-card" class="w-full max-w-md aspect-[3/4] relative transition-all duration-500 rounded-lg shadow-sm overflow-hidden transform hover:scale-[1.02]">
+                        <div id="poem-content" class="absolute inset-0 flex flex-col items-center justify-center p-8 md:p-12">
+                            <div id="poem-text" class="text-center mb-8 transition-all">
+                                <p class="text-xl md:text-2xl leading-relaxed"></p>
+                            </div>
+                            <div id="poem-author" class="text-right w-full mt-auto italic opacity-75">
+                                <p></p>
+                            </div>
+                        </div>
                     </div>
-                    <div id="poem-author" class="text-right w-full mt-auto italic opacity-75">
-                        <p></p>
-                    </div>
-                </div>
-            </div>
 
-            <div class="flex flex-wrap justify-center gap-4 mt-8">
-                <button id="generate-btn" class="px-6 py-2 rounded-md bg-stone-800 text-white hover:bg-stone-700 transition-colors">
-                    Generate New Poem
-                </button>
-                <button id="download-btn" class="px-6 py-2 rounded-md bg-stone-200 text-stone-800 hover:bg-stone-300 transition-colors">
-                    Download Card
-                </button>
-            </div>
-
-            <div class="w-full max-w-md mt-12 space-y-6">
-                <div class="space-y-2">
-                    <h3 class="text-sm uppercase tracking-wider text-stone-500 font-semibold">Customize</h3>
-                    <div>
-                        <label for="custom-text" class="block text-sm text-stone-600 mb-1">Your Own Words</label>
-                        <textarea id="custom-text" class="w-full p-3 rounded-md border border-stone-300 focus:outline-none focus:ring-1 focus:ring-stone-500" rows="4" placeholder="Enter your own poem..."></textarea>
-                        <button id="apply-custom-text" class="mt-2 px-4 py-1.5 rounded-md bg-stone-200 text-stone-800 hover:bg-stone-300 transition-colors text-sm">
-                            Apply Text
+                    <div class="flex flex-wrap justify-center gap-4 mt-8">
+                        <button id="generate-btn" class="px-6 py-2 rounded-md bg-stone-800 text-white hover:bg-stone-700 transition-colors">
+                            Generate New Poem
+                        </button>
+                        <button id="download-btn" class="px-6 py-2 rounded-md bg-stone-200 text-stone-800 hover:bg-stone-300 transition-colors">
+                            Download Card
                         </button>
                     </div>
+                    
+                    <!-- 自定义文本和作者输入功能 - 移动到左侧卡片下方 -->
+                    <div class="w-full max-w-md mt-8 space-y-4">
+                        <h3 class="text-sm uppercase tracking-wider text-stone-500 font-semibold">Customize</h3>
+                        <div>
+                            <label for="custom-text" class="block text-sm text-stone-600 mb-1">Your Own Words</label>
+                            <textarea id="custom-text" class="w-full p-3 rounded-md border border-stone-300 focus:outline-none focus:ring-1 focus:ring-stone-500" rows="4" placeholder="Enter your own poem..."></textarea>
+                            <label for="custom-author" class="block text-sm text-stone-600 mb-1 mt-2">Author Name</label>
+                            <input id="custom-author" class="w-full p-3 rounded-md border border-stone-300 focus:outline-none focus:ring-1 focus:ring-stone-500" type="text" placeholder="Enter author name...">
+                            <button id="apply-custom-text" class="mt-2 px-4 py-1.5 rounded-md bg-stone-200 text-stone-800 hover:bg-stone-300 transition-colors text-sm">
+                                Apply Text
+                            </button>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- 右侧：自定义控制选项 -->
+                <div class="w-full md:w-1/2 mt-12 md:mt-0 space-y-6 max-w-md mx-auto control-panel">
 
                 <div class="space-y-2">
                     <h3 class="text-sm uppercase tracking-wider text-stone-500 font-semibold">Style</h3>
@@ -76,16 +85,16 @@
                 <div class="space-y-2">
                     <h3 class="text-sm uppercase tracking-wider text-stone-500 font-semibold">Font</h3>
                     <div class="grid grid-cols-5 gap-2">
-                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="0">宋体 A</button>
-                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="1">宋体 B</button>
-                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="2">宋体 C</button>
-                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="3">宋体 D</button>
-                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="4">宋体 E</button>
-                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="5">宋体 F</button>
-                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="6">宋体 G</button>
-                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="7">宋体 H</button>
-                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="8">宋体 I</button>
-                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="9">宋体 J</button>
+                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="0">楷体</button>
+                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="1">黑体</button>
+                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="2">雅黑</button>
+                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="3">圆体</button>
+                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="4">明体</button>
+                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="5">仿宋</button>
+                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="6">隶书</button>
+                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="7">幼圆</button>
+                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="8">行楷</button>
+                        <button class="font-btn w-full py-2 rounded-md border border-stone-300 hover:border-stone-500 text-sm" data-font="9">宋体</button>
                     </div>
                 </div>
 
@@ -98,6 +107,15 @@
                         <button class="color-btn w-full aspect-square rounded-md border border-stone-300 hover:border-stone-500 bg-emerald-900" data-color="#064e3b"></button>
                         <button class="color-btn w-full aspect-square rounded-md border border-stone-300 hover:border-stone-500 bg-indigo-900" data-color="#312e81"></button>
                     </div>
+                    <h4 class="text-sm uppercase tracking-wider text-stone-500 font-semibold mt-4">Vintage Colors</h4>
+                    <div class="grid grid-cols-5 gap-2">
+                        <button class="color-btn w-full aspect-square rounded-md border border-stone-300 hover:border-stone-500" style="background-color: var(--vintage-red)" data-color="var(--vintage-red)"></button>
+                        <button class="color-btn w-full aspect-square rounded-md border border-stone-300 hover:border-stone-500" style="background-color: var(--vintage-green)" data-color="var(--vintage-green)"></button>
+                        <button class="color-btn w-full aspect-square rounded-md border border-stone-300 hover:border-stone-500" style="background-color: var(--vintage-ochre)" data-color="var(--vintage-ochre)"></button>
+                        <button class="color-btn w-full aspect-square rounded-md border border-stone-300 hover:border-stone-500" style="background-color: var(--vintage-indigo)" data-color="var(--vintage-indigo)"></button>
+                        <button class="color-btn w-full aspect-square rounded-md border border-stone-300 hover:border-stone-500" style="background-color: var(--vintage-bronze)" data-color="var(--vintage-bronze)"></button>
+                    </div>
+                </div>
                 </div>
             </div>
         </main>

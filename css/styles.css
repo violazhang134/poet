@@ -113,11 +113,58 @@ button:active {
 #poem-text {
   font-family: 'Playfair Display', 'Noto Serif SC', serif;
   line-height: 1.8;
+  transition: all 0.5s ease;
+  font-size: 80%; /* 字号减小20% */
+  white-space: pre-line; /* 保留换行符 */
 }
 
 #poem-author {
   font-family: 'Playfair Display', serif;
   font-style: italic;
+  transition: all 0.5s ease;
+  font-size: 80%; /* 字号减小20% */
+}
+
+/* Card sizing and transitions */
+#poem-card {
+  transition: all 0.5s ease-in-out;
+}
+
+#poem-content {
+  transition: padding 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 垂直居中 */
+}
+
+/* 响应式布局调整 */
+@media (max-width: 768px) {
+  /* 在移动设备上垂直排列 */
+  .flex-col-mobile {
+    flex-direction: column;
+  }
+  
+  /* 在移动设备上居中对齐 */
+  .center-mobile {
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* 左右分栏布局优化 */
+.control-panel {
+  height: fit-content;
+  position: sticky;
+  top: 2rem;
+}
+
+/* Vintage Colors for Text */
+:root {
+  --vintage-red: #a83240;      /* 复古红 */
+  --vintage-green: #2c5545;    /* 墨绿 */
+  --vintage-ochre: #c68e3e;    /* 赭石色 */
+  --vintage-indigo: #2d4262;   /* 靛蓝 */
+  --vintage-bronze: #8b6b4c;   /* 古铜色 */
 }
 
 /* Style for the card when being ready for download */

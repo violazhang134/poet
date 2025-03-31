@@ -4,16 +4,19 @@ const poemText = document.getElementById('poem-text').querySelector('p');
 const poemAuthor = document.getElementById('poem-author').querySelector('p');
 const generateBtn = document.getElementById('generate-btn');
 const customTextInput = document.getElementById('custom-text');
+const customAuthorInput = document.getElementById('custom-author');
 const applyCustomTextBtn = document.getElementById('apply-custom-text');
 const styleBtns = document.querySelectorAll('.style-btn');
 const fontBtns = document.querySelectorAll('.font-btn');
 const colorBtns = document.querySelectorAll('.color-btn');
+const poemContent = document.getElementById('poem-content');
 
 // Current Settings
 let currentStyle = 0;
 let currentFont = 0;
 let currentColor = '#1c1917';
 let currentPoem = '';
+let initialCardSize = true; // 标记卡片是否处于初始尺寸状态
 
 // Initialize
 function init() {
@@ -22,11 +25,24 @@ function init() {
     fontBtns[0].classList.add('active');
     colorBtns[0].classList.add('active');
     
+    // 设置卡片初始尺寸较小
+    setInitialCardSize();
+    
     // Generate initial poem
     generateNewPoem();
     
     // Preview styles on style buttons
     setupStylePreviews();
+}
+
+// 设置卡片初始尺寸
+function setInitialCardSize() {
+    if (initialCardSize) {
+        poemCard.style.maxWidth = '300px';
+        poemCard.style.height = '300px';
+        poemContent.style.padding = '20px';
+        initialCardSize = true;
+    }
 }
 
 // Generate a new poem
@@ -35,7 +51,7 @@ function generateNewPoem() {
     currentPoem = poems[randomIndex];
     
     // Apply the poem text
-    poemText.textContent = currentPoem;
+    poemText.innerHTML = currentPoem; // 使用innerHTML以保持一致性
     poemAuthor.textContent = "- inspired by rupi kaur";
     
     // Apply a random style
@@ -47,6 +63,9 @@ function generateNewPoem() {
     
     // Update UI to show active buttons
     updateActiveButtons(randomStyle, randomFont, 0);
+    
+    // 调整卡片大小以适应内容
+    adjustCardSize();
 }
 
 // Apply a specific style
@@ -78,9 +97,18 @@ function applyFont(fontIndex) {
 
 // Apply a specific text color
 function applyColor(color) {
-    poemText.style.color = color;
-    poemAuthor.style.color = color;
-    currentColor = color;
+    // 处理CSS变量形式的颜色值
+    if (color.startsWith('var(')) {
+        // 直接应用CSS变量
+        poemText.style.color = color;
+        poemAuthor.style.color = color;
+        currentColor = color;
+    } else {
+        // 直接应用十六进制颜色值
+        poemText.style.color = color;
+        poemAuthor.style.color = color;
+        currentColor = color;
+    }
 }
 
 // Update body background based on card style
@@ -157,11 +185,64 @@ generateBtn.addEventListener('click', generateNewPoem);
 
 applyCustomTextBtn.addEventListener('click', () => {
     const customText = customTextInput.value.trim();
+    const customAuthor = customAuthorInput.value.trim();
+    
     if (customText) {
-        poemText.textContent = customText;
+        // 将文本中的换行符转换为HTML的<br>标签
+        const formattedText = customText.replace(/\n/g, '<br>');
+        poemText.innerHTML = formattedText;
         currentPoem = customText;
+        // 调整卡片大小以适应自定义文本
+        adjustCardSize();
+    }
+    
+    if (customAuthor) {
+        poemAuthor.textContent = `- ${customAuthor}`;
+    } else {
+        poemAuthor.textContent = "- inspired by rupi kaur";
     }
 });
+
+// 根据文本内容调整卡片大小
+function adjustCardSize() {
+    // 获取文本长度和行数
+    const textLength = currentPoem.length;
+    const lineCount = (currentPoem.match(/\n/g) || []).length + 1; // 计算行数
+    
+    // 根据文本长度和行数动态调整卡片大小
+    if (textLength > 0) {
+        // 移除初始尺寸状态
+        initialCardSize = false;
+        
+        // 基础尺寸
+        let baseWidth = 300;
+        let baseHeight = 300;
+        
+        // 根据文本长度增加尺寸
+        if (textLength > 50 || lineCount > 3) {
+            baseWidth = 350;
+            baseHeight = 400;
+        }
+        
+        if (textLength > 100 || lineCount > 6) {
+            baseWidth = 400;
+            baseHeight = 500;
+        }
+        
+        // 根据行数额外增加高度
+        if (lineCount > 10) {
+            baseHeight += (lineCount - 10) * 20; // 每多一行增加20px高度
+        }
+        
+        // 应用新尺寸，使用过渡效果
+        poemCard.style.maxWidth = `${baseWidth}px`;
+        poemCard.style.height = `${baseHeight}px`;
+        
+        // 调整内边距
+        const padding = Math.min(40, 20 + textLength / 10);
+        poemContent.style.padding = `${padding}px`;
+    }
+}
 
 styleBtns.forEach(btn => {
     btn.addEventListener('click', () => {
